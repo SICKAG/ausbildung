@@ -5,7 +5,7 @@ Wenn du dich für ein technisches Praktikum bei uns interessierst, kannst du dic
 Die **LED Lampe** wirst du während deines Praktikums anfertigen und kannst diese im Anschluss weiter entwickeln.
 Dazu soll dir dieses Projektseite alle notwendigen Informationen und Dateien bereitstellen.
 
-Eine detaillierte Erklärung der Bibliothek und Programme findest du hier: [Wiki](https://github.com/SICKAG/ausbildung/wiki/Bibliothek)
+Eine detaillierte Erklärung der Bibliothek und Programme findest du hier: [Wiki](https://github.com/SICKAG/ausbildung/wiki)
 
 ##LED Lampe
 Die **LED Lampe** ist eine kleine Tischlampe, bestehend aus folgenden Komoponenten.
@@ -18,7 +18,7 @@ Die **LED Lampe** ist eine kleine Tischlampe, bestehend aus folgenden Komoponent
 
 ###Installlation
 1. Installation Arduino IDE  *[Arduino](https://www.arduino.cc/)*
-2. Installation Treiber (CH341SER)
+2. Installation Treiber *[CH341SER](https://github.com/SICKAG/ausbildung/raw/master/driver/CH341SER.zip)*
 3. Installation der Biblothek *[NanoESP](https://github.com/FKainka/NanoESP)*
     - Kopiere den Ordner *NanoESP* nach *Arduino/libraries*
 4. Installation der Bibliothek *[TimerOne](https://code.google.com/archive/p/arduino-timerone/downloads)*
