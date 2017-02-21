@@ -5,6 +5,8 @@ Wenn du dich für ein technisches Praktikum bei uns interessierst, kannst du dic
 Die **LED Lampe** wirst du während deines Praktikums anfertigen und kannst diese im Anschluss weiter entwickeln.
 Dazu soll dir dieses Projektseite alle notwendigen Informationen und Dateien bereitstellen.
 
+![SICK LedLampe](https://github.com/SICKAG/ausbildung/raw/master/images/LedLampe.JPG)
+
 Eine detaillierte Erklärung der Bibliothek und Programme findest du hier: [Wiki](https://github.com/SICKAG/ausbildung/wiki)
 
 ##LED Lampe
