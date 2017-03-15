@@ -18,6 +18,7 @@
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 #include "LedProtocolFunctions.h"
+#include "LedLampe.h"
 
 int h = 0;
 int b = 0;
@@ -65,13 +66,16 @@ void run(LedLampe *myLamp,int wait)
 
 void sensor(LedLampe *myLamp, int sensor)
 {
+	int r;
 	switch(sensor)
 		{
 			case 1:
-				Serial.write(myLamp->getButton());
+				r = myLamp->getButton();
+				Serial.println(r);
 				break;
 			case 2: 
-				Serial.write(myLamp->getLight());
+				r = myLamp->getLight();
+				Serial.println(r);
 				break;
 		  default:
 			break;
@@ -114,16 +118,20 @@ void demo(LedLampe *myLamp, int demo)
 
 void info(LedLampe *myLamp, int info)
 {
+	String ip;
+
 	switch(info)
 	{
 		case 1: 
-			Serial.print("Name: SICK LedLampe");
+			Serial.println("Name: SICK LedLampe");
 			break;
 		case 2:
-			Serial.print("IP-Adresse: 192.168.4.1");
+			ip = nanoesp.getIp();
+			Serial.print("IP-Adresse: ");
+			Serial.println(ip);
 			break;
 		case 3:
-			Serial.print("Version: 1.0 (07.11.2016)");
+			Serial.println("Version: 20170315)");
 			break;
 		
 	}

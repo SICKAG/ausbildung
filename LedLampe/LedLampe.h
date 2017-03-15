@@ -28,6 +28,8 @@
 #define ON 255
 #define OFF 0
 
+extern NanoESP nanoesp;
+
 class LedProtocol;
 
 class LedLampe

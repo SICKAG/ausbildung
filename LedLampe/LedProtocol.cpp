@@ -26,7 +26,6 @@
 
 int params[7];
 
-NanoESP nanoesp = NanoESP();
 NanoESP_HTTP http = NanoESP_HTTP(nanoesp); //init http library with an instance of nanoesp
 
 bool sendFromFlash(int client, const char *website, int len) {
@@ -62,9 +61,8 @@ void LedProtocol::beginSerial(int baudrate)
 }
 
 void LedProtocol::beginWebsite(int mode, String ssid, String passwd)
-{ 
-  nanoesp.init();
-  
+{   
+nanoesp.init();
   if (nanoesp.configWifiMode(mode))Serial.println(F("WifiMode ok"));else Serial.println(F("WifiMode failed"));
   //! Only if you use a new Network
   if(nanoesp.configWifi(mode, ssid, passwd))Serial.println(F("Wifi ok"));else Serial.println(F("Wifi failed"));
@@ -213,7 +211,7 @@ void LedProtocol::function() {
 				run(myLamp, params[2]);
 			break;
 		case FUNC_SHINE:
-			myLamp->setLeds(63,myLamp->getLight());	
+			myLamp->setLeds(params[2],map(myLamp->getLight(),0,550,0,100));	
 		break;
 		default:
         break;

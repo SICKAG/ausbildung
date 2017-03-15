@@ -27,6 +27,8 @@ volatile char leds[6];
 volatile char ledsPercent[6];
 volatile char _ledsPercent[6];
 
+NanoESP nanoesp = NanoESP();
+
 void dimInterrupt()
 {
 	if(timeCounter==0)
