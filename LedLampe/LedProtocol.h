@@ -21,8 +21,7 @@
 #define LedProtocol_h
 
 #include "LedLampe.h"
-#include "NanoESP.h"
-#include "NanoESP_HTTP.h"
+#include "sickESP.h"
 
 #define INITIAL 0
 #define LED 1
@@ -42,11 +41,10 @@ class LedProtocol
 	public:
 		void getParameter(int cmd, char *buf);
 		void serialEvent();
-		void wifiEvent();
+		void wifiSerialEvent();
 		void loop();
 		void beginSerial(int baudrate);
-		void beginWebsite(int mode, String ssid, String password);
-		void sendWebsite(int id, String site);
+		int getProgram();
 		LedProtocol(LedLampe *lampe);
 		void function();
 		

@@ -32,6 +32,6 @@ void pulse(LedLampe *myLamp, int mask, int percent1, int percent2, int wait);
 void run(LedLampe *myLamp,int wait);
 void sensor(LedLampe *myLamp, int sensor);
 void demo(LedLampe *myLamp, int demo);
-void info(LedLampe *myLamp, int info);
+/*void info(LedLampe *myLamp, int info);*/
 
 #endif

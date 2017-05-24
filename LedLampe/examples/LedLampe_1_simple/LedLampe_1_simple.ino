@@ -3,7 +3,7 @@
 // http://sick.com/ausbildung
 // https://github.com/SICKAG/ausbildung
 
-// updated: 27.01.2017
+// updated: 22.005.2017
 
 
 #include <LedLampe.h>

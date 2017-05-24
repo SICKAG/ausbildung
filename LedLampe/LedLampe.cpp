@@ -27,7 +27,8 @@ volatile char leds[6];
 volatile char ledsPercent[6];
 volatile char _ledsPercent[6];
 
-NanoESP nanoesp = NanoESP();
+//NanoESP nanoesp = NanoESP();
+sickESP sickesp = sickESP();
 
 void dimInterrupt()
 {
@@ -130,7 +131,7 @@ void LedLampe::wait(int millis)
 			delay(5);
 			millis-= 5;
 			protocol->serialEvent();	
-			protocol->wifiEvent();	
+			protocol->wifiSerialEvent();	
 		}
 		delay(millis);
 	}

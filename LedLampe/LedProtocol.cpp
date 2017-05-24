@@ -21,27 +21,8 @@
 #include "LedLampe.h"
 #include "LedProtocol.h"
 #include "LedProtocolFunctions.h"
-#include "Webpages.h"
-#include <SoftwareSerial.h>
 
 int params[7];
-
-NanoESP_HTTP http = NanoESP_HTTP(nanoesp); //init http library with an instance of nanoesp
-
-bool sendFromFlash(int client, const char *website, int len) {
-  
-  if (nanoesp.sendCom("AT+CIPSEND=" + String(client) + "," + String(len), ">")) {
-    for (int i = 0; i <= len; i++)
-    {
-      nanoesp.print(char(pgm_read_byte_near(website + i)));
-    }
-  }
-  else {
-    return false;
-  }
-  return nanoesp.find("OK\r\n");
-}
-
 
 char buffer[64];
 
@@ -53,6 +34,7 @@ LedProtocol::LedProtocol(LedLampe *lampe)
 	oldProgram = 0;
 	myLamp = lampe;
 	myLamp->protocol = this;
+	sickesp.begin(9600);
 }
 
 void LedProtocol::beginSerial(int baudrate)
@@ -60,77 +42,27 @@ void LedProtocol::beginSerial(int baudrate)
 	Serial.begin(baudrate);
 }
 
-void LedProtocol::beginWebsite(int mode, String ssid, String passwd)
-{   
-nanoesp.init();
-  if (nanoesp.configWifiMode(mode))Serial.println(F("WifiMode ok"));else Serial.println(F("WifiMode failed"));
-  //! Only if you use a new Network
-  if(nanoesp.configWifi(mode, ssid, passwd))Serial.println(F("Wifi ok"));else Serial.println(F("Wifi failed"));
-  //nanoesp.configWifiMode(mode);
-   
-  if(mode==STATION){
-   // Wait till Connected to WiFi
-	if (nanoesp.wifiConnected())Serial.println(F("WLAN connect"));else Serial.println(F("WLAN connect failed"));
-  }
-  //Start TCP Server
-  if (nanoesp.startTcpServer(80))Serial.println(F("TCP Server Activ")); else   Serial.println(F("TCP Server Error"));
 
-  //Print IP to Terminal
-  String ip = nanoesp.getIp();
-  Serial.println(ip);
-}
-
-void LedProtocol::wifiEvent()
+void LedProtocol::wifiSerialEvent()
 {
-	String method, ressource, parameter;
-	int id;
-	if (http.recvRequest(id, method, ressource, parameter)) 
-	{ 
-		//Incoming request, parameters by reference
-		//Serial.println("New Request from id :" + String(id) + ", method: " + method +  ", ressource: " + ressource +  " parameter: " + parameter);
-
-	if(ressource == "/")
-	{	
-		sendFromFlash(id, index, sizeof(index));		
-		nanoesp.closeConnection(id);
-		
-		if(parameter.length()>0)
-		{
-			String cmd = parameter;
-			
-			//Serial.println(cmd);
-			cmd.replace("?cmd=", "");
-			cmd.replace("%20", " ");
-			cmd.replace("%25", " ");
-			cmd.replace("+", " ");
-			
-			//Serial.println(cmd);
-			zaehler = 1;
-			command[0] = 0x02;
-			for(int i=0; i<cmd.length(); i++)
-			{
-				command[zaehler] = cmd.charAt(i);
-				zaehler++;
-			}
-			command[zaehler] = 0x03;
+	 while (sickesp.available()) {
+    // get the new byte:
+    char inChar = (char)sickesp.read();
+		//Prüfen ob Recieve ein Startzeichen ist
+		if (inChar == 0x02) {
+			//Alles bisherige löschen
+			zaehler = 0;
+			command[zaehler] = inChar;
 			zaehler++;
-			command[zaehler] = '\0';
+		} else if (inChar == 0x03) {
 			newData = 1;
+			command[zaehler] = inChar;
+			command[zaehler + 1] = '\0';
+		} else {
+			command[zaehler] = inChar;
+			zaehler++;
 		}
-	}
-	else if(ressource=="/favicon.ico")
-	{
-		nanoesp.closeConnection(id);
-	}
-	else
-	{
-		sendFromFlash(id, error, sizeof(error));
-	    nanoesp.closeConnection(id);
-	}
-	
-	
-	
-	}
+  }  
 }
 
 void LedProtocol::serialEvent()
@@ -154,6 +86,7 @@ void LedProtocol::serialEvent()
 		}
   }  
 }
+
 
 void LedProtocol::loop()
 {
@@ -186,16 +119,17 @@ void LedProtocol::loop()
 		case DEMO:
 			demo(myLamp, params[1]);
 			break;
-		case INFO:
+		/*case INFO:
 			info(myLamp, params[1]);
 			program = oldProgram;
-			break;
+			break;*/
 		default:
 			program = 0;
 			break;
   }
+
 	serialEvent();	
-	wifiEvent();	
+	wifiSerialEvent();	
 }
 
 void LedProtocol::function() {
@@ -247,4 +181,8 @@ void LedProtocol::getParameter(int cmd, char *buf) {
 
   number[zahl] = '\0';
   params[pos] = atoi(number);
+}
+
+int LedProtocol::getProgram(){
+	return program;
 }

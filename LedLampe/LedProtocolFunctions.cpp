@@ -116,7 +116,7 @@ void demo(LedLampe *myLamp, int demo)
 		}
 }
 
-void info(LedLampe *myLamp, int info)
+/*void info(LedLampe *myLamp, int info)
 {
 	String ip;
 
@@ -126,7 +126,7 @@ void info(LedLampe *myLamp, int info)
 			Serial.println("Name: SICK LedLampe");
 			break;
 		case 2:
-			ip = nanoesp.getIp();
+			ip = serialSickesp.getIP();
 			Serial.print("IP-Adresse: ");
 			Serial.println(ip);
 			break;
@@ -135,4 +135,4 @@ void info(LedLampe *myLamp, int info)
 			break;
 		
 	}
-}
+}*/

@@ -24,11 +24,10 @@
 #include "Arduino.h"
 #include "LedProtocol.h"
 
-
 #define ON 255
 #define OFF 0
 
-extern NanoESP nanoesp;
+extern sickESP sickesp;
 
 class LedProtocol;
 
