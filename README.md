@@ -41,7 +41,7 @@ Die **LED Lampe** ist eine kleine Tischlampe, bestehend aus folgenden Komoponent
 2. Beispiel öffnen (*Datei>Beispiele>LedLampe>LedLampe_0_template.ino*)
 3. LED Lampe anschließen (USB)
 4. Einstellungen  öffnen (*Werkzeug*)
-  * Board: "Arduino Nano"
-  * Prozessor: "ATmega328"
-  * Port: "COM..."
+	- Board: "Arduino Nano"
+	- Prozessor: "ATmega328"
+	- Port: "COM..."
 5. Programm übertragen
