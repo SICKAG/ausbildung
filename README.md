@@ -37,6 +37,10 @@ Die **LED Lampe** ist eine kleine Tischlampe, bestehend aus folgenden Komoponent
     - Kopiere den Ordner *LedLampeWebserver* nach *Arduino/libraries*
 
 ### Schnellstart
+Eine Quickstart-Anleitung für die LED Lampe mit der neusten Firmware findest du hier: [Quickstart](https://github.com/SICKAG/ausbildung/blob/master/doc/quickstart.pdf)
+Du hast noch eine alte Version und möchtest die neue Firmware installieren? Dann bist du hier richtig: [Firmware Update] (https://github.com/SICKAG/ausbildung/blob/master/doc/esp%20firmware%20update.pdf)
+
+### Mit Programmieren loslegen
 1. Starte Arduino
 2. Beispiel öffnen (*Datei>Beispiele>LedLampe>LedLampe_0_template.ino*)
 3. LED Lampe anschließen (USB)
