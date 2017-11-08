@@ -1,9 +1,3 @@
-// Copyright 2017 SICK AG. All rights reserved.
-
-// http://sick.com/ausbildung
-// https://github.com/SICKAG/ausbildung
-
-// updated: 22.05.2017
 
 #include <LedLampe.h>
 #include <LedProtocol.h>
@@ -19,30 +13,37 @@
 #define BUTTON 2  //Button Pin
 
 #define BAUDRATE 19200
-
+//hier sollten noch mehr variablen stehen
 LedLampe myLamp(LED1, LED2, LED3, LED4, LED5, LED6, PHOTO, BUTTON);
 LedProtocol myProtocol(&myLamp);
 
-void serialEvent() {
+void serialEvent()
+{
   myProtocol.serialEvent();
 }
 
-void setup() {
+
+
+//Interrupt routine
+void buttonPress()
+{
+
+  // hier soll die Aufgabe Entprellen gelöst werden !!
+}
+
+void setup()
+{
   myLamp.begin();
   myProtocol.beginSerial(BAUDRATE);
 }
 
-void loop() {
- myProtocol.loop();
+void loop()
+{
+  myProtocol.loop();
 }
 
 void initial()
 {
-  myLamp.setLeds(63, 100);
-  myLamp.wait(500);
-  Serial.println("SICK Ausbildung");
-  myLamp.setLeds(63, 0);
-  myLamp.wait(500);
-  Serial.println("www.sick.com/ausbildung\r\n");
-}
+  //TODO: Hier beginnt dein Programm
 
+}

@@ -26,6 +26,8 @@ LedProtocol myProtocol(&myLamp);
 volatile int programState = 0;
 int clickTime = 0;
 int clickTimeOld = 0;
+volatile int runningLight = 0;
+volatile int dimm = 0;
 
 //interrupt routine
 void buttonPress()
@@ -38,6 +40,8 @@ void buttonPress()
   if (clickTime == 0 || diff > 200)
   {
     programState++;
+    runningLight = 0;
+    dimm = 0;
   }
 }
 
@@ -48,13 +52,13 @@ void serialEvent() {
 void setup() {
   myLamp.begin();
   myProtocol.beginSerial(BAUDRATE);
-  
+
   //attach interrupt to function buttonPress for BUTTON
   attachInterrupt(digitalPinToInterrupt(BUTTON), buttonPress, RISING);
 }
 
 void loop() {
- myProtocol.loop();
+  myProtocol.loop();
 }
 
 void initial()
@@ -80,13 +84,19 @@ void initial()
       break;
     case 4:
       myLamp.off();
+      myLamp.wait(500);
+      myLamp.on();
+      myLamp.wait(500);
+      break;
+    case 5:
+      myLamp.off();
       myLamp.setLeds(21, 100);
       myLamp.wait(500);
       myLamp.off();
       myLamp.setLeds(42, 100);
       myLamp.wait(500);
       break;
-    case 5:
+    case 6:
       myLamp.off();
       myLamp.setLeds(0b00111000, 100);
       myLamp.wait(250);
@@ -94,7 +104,7 @@ void initial()
       myLamp.setLeds(0b00000111, 100);
       myLamp.wait(250);
       break;
-    case 6:
+    case 7:
       int lightIntensity;
       lightIntensity = myLamp.getLight();
       //Shift (from 10bit to 8 bit)
@@ -107,6 +117,39 @@ void initial()
       {
         myLamp.setLeds(63, lightIntensity);
       }
+      break;
+    case 8:
+      myLamp.off();
+      if (runningLight >= 7)runningLight = 0;
+      runningLight += 1;
+      myLamp.setLed(runningLight, 100);
+      myLamp.setLed(runningLight - 1, 0);
+      myLamp.wait(500);
+      break;
+    case 9:
+      myLamp.off();
+      if (runningLight >= 7)runningLight = 0;
+      if (dimm >= 100)
+      {
+        dimm = 0;
+        runningLight ++;
+      }
+      myLamp.setLed(runningLight, dimm);
+      myLamp.setLed(runningLight - 1, 0);
+      dimm ++;
+      myLamp.wait(10);
+      break;
+    case 10:
+      myLamp.off();
+      if(runningLight == 3)runningLight = 0;
+        if (dimm >= 100)
+      {
+        dimm = 0;
+        runningLight ++;
+      }
+      myLamp.setLeds((0b001000 << runningLight)^(0b000100 >> runningLight),dimm);
+      dimm++;
+      myLamp.wait(10);
       break;
     default:
       programState = 0;
