@@ -38,7 +38,8 @@ Die **LED Lampe** ist eine kleine Tischlampe, bestehend aus folgenden Komoponent
 
 ### Schnellstart
 Eine Quickstart-Anleitung für die LED Lampe mit der neusten Firmware findest du hier: [Quickstart](https://github.com/SICKAG/ausbildung/blob/master/doc/quickstart.pdf)
-Du hast noch eine alte Version und möchtest die neue Firmware installieren? Dann bist du hier richtig: [Firmware Update] (https://github.com/SICKAG/ausbildung/blob/master/doc/esp%20firmware%20update.pdf)
+
+Du hast noch eine alte Version und möchtest die neue Firmware installieren? Dann bist du hier richtig: [Firmware Update](https://github.com/SICKAG/ausbildung/blob/master/doc/esp%20firmware%20update.pdf)
 
 ### Mit Programmieren loslegen
 1. Starte Arduino
