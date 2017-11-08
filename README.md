@@ -9,6 +9,12 @@ Dazu soll dir dieses Projektseite alle notwendigen Informationen und Dateien ber
 
 Eine detaillierte Erklärung der Bibliothek und Programme findest du hier: [Wiki](https://github.com/SICKAG/ausbildung/wiki)
 
+## Ordnerstruktur
+* doc (Anleitungen und andere Dokumente)
+* driver (USB-Treiber für das Board)
+* firmware (Firmware für Arduino und ESP-Modul)
+* images (Bilder der LED Lampe)
+
 ## LED Lampe
 Die **LED Lampe** ist eine kleine Tischlampe, bestehend aus folgenden Komoponenten.
 * Mikrocontroller (Arduino Nano, Arduino Micro oder kompatible Boards)
@@ -23,12 +29,16 @@ Die **LED Lampe** ist eine kleine Tischlampe, bestehend aus folgenden Komoponent
 2. Installation Treiber *[CH341SER](https://github.com/SICKAG/ausbildung/raw/master/driver/CH341SER.zip)*
 3. Installation der Bibliothek *[TimerOne](https://code.google.com/archive/p/arduino-timerone/downloads)*
     - Kopiere den Ordner *TimerOne* nach *Arduino/libraries*
-4. Installation der Bibliothek *LED Lampe*
-    - Kopiere den Ordner *LED Lampe* nach *Arduino/libraries*
+4. Installation der Bibliothek *[StringTokenizer](https://github.com/syalujjwal/Arduino-StringTokenizer-Library)*
+	- Kopiere den Ordner *StringTokenizer* nach *Arduino/libraries*
+5. Installation der Bibliothek *[LedLampe](https://github.com/SICKAG/ausbildung/tree/master/firmware/Arduino/LedLampe)*
+    - Kopiere den Ordner *LedLampe* nach *Arduino/libraries*
+6. Installation der Bibliothek *[LedLampeWebserver](https://github.com/SICKAG/ausbildung/tree/master/firmware/ESP/LedLampeWebserver)*
+    - Kopiere den Ordner *LedLampeWebserver* nach *Arduino/libraries*
 
 ### Schnellstart
 1. Starte Arduino
-2. Beispiel öffnen (*Datei>Beispiele>LedLampe>LedLampe_1_simple*)
+2. Beispiel öffnen (*Datei>Beispiele>LedLampe>LedLampe_0_template.ino*)
 3. LED Lampe anschließen (USB)
 4. Einstellungen  öffnen (*Werkzeug*)
   * Board: "Arduino Nano"
