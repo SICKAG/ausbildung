@@ -13,7 +13,7 @@
 /*      http://sick.com/ausbildung                      */
 /*      https://github.com/SICKAG/ausbildung            */
 /*														*/
-/*      updated: 26.09.2017					       		*/
+/*      updated: 08.02.2018					       		*/
 /*														*/	
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
@@ -146,7 +146,7 @@ void sendDataToClient() {
   }
 
   
-  myWebserver.espServer.send(200, "text/html", commandBuffer);
+ espServer.send(200, "text/html", commandBuffer);
 
   
 };
@@ -184,13 +184,13 @@ void sendJsonToClient(String cmd) { //create JSON-Object and send to Client
 
   if (cmd.indexOf("4 1") >= 0) {
     String newJson = generateJson("Button",  String(commandBuffer));
-     myWebserver.espServer.send(200, "text/html", newJson);
+    espServer.send(200, "text/html", newJson);
   } else if (cmd.indexOf("4 2") >= 0) {
     String newJson = generateJson("Photodiode",  String(commandBuffer));
-     myWebserver.espServer.send(200, "text/html", newJson);
+    espServer.send(200, "text/html", newJson);
   } else if (cmd.indexOf("6 2") >= 0) {
     String newJson = generateJson("Version", String(commandBuffer));
-     myWebserver.espServer.send(200, "text/html", newJson);
+    espServer.send(200, "text/html", newJson);
   }
 
 };

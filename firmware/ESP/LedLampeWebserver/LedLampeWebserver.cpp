@@ -13,19 +13,18 @@
 /*      http://sick.com/ausbildung                      */
 /*      https://github.com/SICKAG/ausbildung            */
 /*														*/
-/*      updated: 26.09.2017 					        */
+/*      updated: 08.02.2018					        */
 /*														*/	
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #include "LedLampeWebserver.h"
 #include "HandleFunctions.h"
 
-LedLampeWebserver::LedLampeWebserver(int port, const char* webContent)
+ESP8266WebServer espServer (80);
+
+LedLampeWebserver::LedLampeWebserver(const char* webContent)
 {	
-	this->espServer = ESP8266WebServer(port);
 	this->webContent = webContent;
 }
-
-
 
 void LedLampeWebserver::serialEvent() {
   int newData = 0;

@@ -24,13 +24,10 @@ String password = "12345678";
 String ipAddress = "192.168.4.1";
 String subnetmask = "255.255.255.0";
 
-int webPort = 80;
-
-
 //Website
 const char* webContent = MAIN_page;
 
-LedLampeWebserver myWebserver(webPort, webContent);
+LedLampeWebserver myWebserver(webContent);
 
 void serialEvent()
 {
@@ -44,7 +41,7 @@ void setup()
   Serial.begin(BAUDRATE);
   
   //Initialization for LedLamp as AccessPoint
-    wifiAPSetup(ipAddress,subnetmask,ssid, password);
+  wifiAPSetup(ipAddress,subnetmask,ssid, password);
     
   //Initialization for LedLamp as Station
   //wifiSTSetup(ssid, password);
@@ -55,5 +52,5 @@ void setup()
 }
 
 void loop() {
-  myWebserver.espServer.handleClient();
+  espServer.handleClient();
 }

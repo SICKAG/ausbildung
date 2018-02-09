@@ -13,7 +13,7 @@
 /*      http://sick.com/ausbildung                      */
 /*      https://github.com/SICKAG/ausbildung            */
 /*														*/
-/*      updated: 26.09.2017					  		    */
+/*      updated: 08.02.2018					  		    */
 /*														*/	
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #include <ESP8266WebServer.h>
@@ -26,16 +26,16 @@ extern String ssid;
 extern String password;
 extern String ipAddress;
 extern String subnetmask;
+extern ESP8266WebServer espServer;
 
 class LedLampeWebserver{
 	public:
-		LedLampeWebserver(int port,const char* webContent);
+		LedLampeWebserver(const char* webContent);
 		void serialEvent();
 		char* arrayBufferSSID;
 		char* arrayBufferPassword;
 		int netZaehler = 0;
 		char networkCharBuffer[255];
-		ESP8266WebServer espServer;
 		const char* webContent;		
 };
 

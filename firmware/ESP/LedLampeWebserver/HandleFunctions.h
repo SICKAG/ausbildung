@@ -13,7 +13,7 @@
 /*      http://sick.com/ausbildung                      */
 /*      https://github.com/SICKAG/ausbildung            */
 /*														*/
-/*      updated: 26.09.2017 					        */
+/*      updated: 08.02.2018					        */
 /*														*/	
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #include <ESP8266WebServer.h>

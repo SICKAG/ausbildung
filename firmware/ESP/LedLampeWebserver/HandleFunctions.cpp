@@ -13,7 +13,7 @@
 /*      http://sick.com/ausbildung                      */
 /*      https://github.com/SICKAG/ausbildung            */
 /*														*/
-/*      updated: 26.09.2017					       		*/
+/*      updated: 08.02.2018					       		*/
 /*														*/	
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
@@ -22,19 +22,20 @@
 
 void handleInit()
 {
-	myWebserver.espServer.on("/api/", HTTP_GET, handleGETAPI);
-	myWebserver.espServer.on("/api/", HTTP_POST, handlePOSTAPI);
-	myWebserver.espServer.on("/", HTTP_GET, handleGET);
-	myWebserver.espServer.on("/", HTTP_POST,handlePOST);
-	myWebserver.espServer.begin(); 
+	espServer.on("/api/", HTTP_GET, handleGETAPI);
+	espServer.on("/api/", HTTP_POST, handlePOSTAPI);
+	espServer.on("/", HTTP_GET, handleGET);
+	espServer.on("/", HTTP_POST,handlePOST);
+	espServer.begin(); 
 }
 
 
 void handleGET() 
 { //called when client sends get request via Website
-	
 
-  String cmd = myWebserver.espServer.arg("cmd"); //get command from url
+  String cmd =espServer.arg("cmd"); //get command from url
+  Serial.print("handelGET: ");
+  Serial.println(espServer.arg("cmd"));
 
   if (cmd != "") {
     cmd.replace("%20", " "); //
@@ -44,13 +45,15 @@ void handleGET()
     Serial.print(cmd); // print command to arduino
     Serial.print("\x03");
   }//end if
-  myWebserver.espServer.send(200, "text/html", myWebserver.webContent); //send plain answer to close request
+ espServer.send(200, "text/html", myWebserver.webContent); //send plain answer to close request
 
 }//end handleGET
 
 void handlePOST()
 {//called when client sends post request via Website
-  String cmd = myWebserver.espServer.arg("cmd");
+  String cmd =espServer.arg("cmd");
+  Serial.print("handelPOST: ");
+  Serial.println(espServer.arg("cmd"));
   if (cmd.indexOf("7") == 0) {
     changeWifiSetup(cmd);
     return;
@@ -76,17 +79,19 @@ void handlePOST()
     if(WiFi.getMode()==1){
      networkInfo = "IP: " + ipAddress2String(WiFi.localIP()) + "<br>" + "SSID: " + WiFi.SSID() ;
     }
-    myWebserver.espServer.send(200, "text/html", networkInfo);
+   espServer.send(200, "text/html", networkInfo);
   }
   else {
-    myWebserver.espServer.send(200, "text/html", ""); //send plain answer to close request
+   espServer.send(200, "text/html", ""); //send plain answer to close request
   }//end if/else
 }//end handlePOST
 
 void handleGETAPI()
 { //called when there's a get request over the API (http://ipOfModul/api/)
 
-  String cmd = myWebserver.espServer.arg("cmd");
+  String cmd =espServer.arg("cmd");
+  Serial.print("handelGETAPI: ");
+  Serial.println(espServer.arg("cmd"));
 
   if (cmd.indexOf("7") == 0) {
     changeWifiSetup(cmd);
@@ -121,17 +126,20 @@ void handleGETAPI()
     if(WiFi.getMode()==1){
      networkInfo = "IP: " + ipAddress2String(WiFi.localIP()) + "<br>" + "SSID: " + WiFi.SSID() ;
     }
-    myWebserver.espServer.send(200, "text/html", networkInfo);
+   espServer.send(200, "text/html", networkInfo);
   }
   else {
-    myWebserver.espServer.send(200, "text/html", "{\"STATUS\":\"OK\"}"); //TODO //FORWORK: index Later: "" -> empty response
+   espServer.send(200, "text/html", "{\"STATUS\":\"OK\"}"); //TODO //FORWORK: index Later: "" -> empty response
   }//end if/else
 
 };
 
 void handlePOSTAPI()
 {
-  String cmd = myWebserver.espServer.arg("cmd");
+  String cmd =espServer.arg("cmd");
+  
+  Serial.print("handelPOSTAPI: ");
+  Serial.println(espServer.arg("cmd"));
 
   if (cmd.charAt(0) == '7')
   {
@@ -155,6 +163,6 @@ void handlePOSTAPI()
   }
   else
   {
-    myWebserver.espServer.send(200, "text/html", "Set Befehl");
+   espServer.send(200, "text/html", "Set Befehl");
   }
 };
